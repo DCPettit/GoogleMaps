@@ -227,7 +227,7 @@ ApptexObj.ContexOnPostRender = function(ctx) {
          
           if(clicked == 1) {
             //for (i in Markers) {
-              for (i = 0; i < Labels.length; i++)
+              for (i = 0; i <= Labels.length; i++)
               {
               if(lColors[i] == "normal")
               {
@@ -276,7 +276,7 @@ ApptexObj.ContexOnPostRender = function(ctx) {
         controlUI2.addEventListener('click', function() {
           if(clicked == 0) {
             //console.log("clicked = " + clicked);
-            for (i = 0; i < Markers.length; i++) {
+            for (i = 0; i <= Markers.length; i++) {
               if(lColors[i] == "normal")
               { 
               // we go through the labels again...
@@ -294,7 +294,7 @@ ApptexObj.ContexOnPostRender = function(ctx) {
             }// end for   
           } else { /* if clicked = 1 */
               //console.log("clicked = " + clicked);
-              for (i = 0; i < Markers.length; i++) {
+              for (i = 0; i <= Markers.length; i++) {
               if(lColors[i] == "normal")
               {
                 // ... and if the icon is 'normal' we will turn the labels off 
@@ -317,43 +317,49 @@ ApptexObj.ContexOnPostRender = function(ctx) {
     // toggle Circles
     function ToggleCirclesControl(controlToggleCirclesDiv, map) {
 
-        // Set CSS for the control border.
-        var controlUI3 = document.createElement('div');
-        controlUI3.setAttribute("class", "buttonBorder");
-        controlUI3.title = 'Click to Toggle Circles';
-        controlToggleDiv.appendChild(controlUI3);
+      // Set CSS for the control border.
+      var controlUI3 = document.createElement('div');
+      controlUI3.setAttribute("class", "buttonBorder");
+      controlUI3.title = 'Click to Toggle Circles';
+      controlToggleDiv.appendChild(controlUI3);
 
-        // Set CSS for the control interior.
-        var controlText3 = document.createElement('div');
-        controlText3.setAttribute("class", "buttonInterior");
-        controlText3.innerHTML = 'Toggle Circles';
-        controlUI3.appendChild(controlText3);
+      // Set CSS for the control interior.
+      var controlText3 = document.createElement('div');
+      controlText3.setAttribute("class", "buttonInterior");
+      controlText3.innerHTML = 'Toggle Circles';
+      controlUI3.appendChild(controlText3);
 
-        // Setup the toggle click event listeners
-        controlUI3.addEventListener('click', function() {
-         
-          if(clicked == 1) {
-            //console.log("clicked = " + clicked + " i = " + i);
-              for (i = 0; i < Circles.length; i++)
+      // Setup the toggle click event listeners
+      controlUI3.addEventListener('click', function() {
+        if(clicked == 1) {
+          //console.log("clicked = " + clicked + " i = " + i);
+            for (i = 0; i <= Circles.length; i++)
+            {
+              //console.log("! " + Circles[i].id + "/" + Circles.length + " Color = " + lColors[i]);
+              if(lColors[i] != "normal")
               {
-                if(lColors[i] != "normal")
-                {
-                  Circles[i].setOptions({fillOpacity:0.10, strokeOpacity:0.8}); 
-                  clicked = 0;
-                }// end if (inner) 
-              }// end for   
-          } else {
-            //console.log("clicked = " + clicked) + " i = " + i;
-              for (i = 0; i < Circles.length; i++)
+                //console.log("ON! " + Markers[i].labelContent + " " + Circles[i].id + "/" + Circles.length + " Color = " + Circles[i].fillColor + " / " + lColors[i]);
+                Circles[i].setOptions({fillOpacity:0.10, strokeOpacity:0.8}); 
+                clicked = 0;
+              }// end if (inner) 
+            }// end for   
+        } else {
+          //console.log("clicked = " + clicked) + " i = " + i;
+            for (i = 0; i <= Circles.length; i++)
+            {
+              if(lColors[i] != "normal")
               {
-                if(lColors[i] != "normal")
-                {
-                  Circles[i].setOptions({fillOpacity:0, strokeOpacity:0}); 
-                  clicked = 1;
-                }// end if (inner) 
-            }// end for
-          }// end if (outer)
-        })// end toggle click event listeners
+                //console.log("OFF! " + Markers[i].labelContent + " " + Circles[i].id + "/" + Circles.length + " Color = " + Circles[i].fillColor + " / " + lColors[i]);
+                Circles[i].setOptions({fillOpacity:0, strokeOpacity:0}); 
+                clicked = 1;
+                //for (i = 0; i < Circles.length; ++i) {
+                //  console.log(Circles[i]);
+                //}
+                //console.log("! " + Markers[93].labelContent + " " + Circles[93].id + "/" + Circles.length + " Color = " + Circles[93].fillColor + " / " + lColors[93]);
+              }// end if (inner) 
+          }// end for
+        }// end if (outer)
+      })// end toggle click event listeners
     }// end function 
 
     function drawMaker(i){
@@ -413,10 +419,22 @@ ApptexObj.ContexOnPostRender = function(ctx) {
               fillOpacity: 0.10,
               map: map,
               center: myLatLng
+            }
+          } else {
+          var circleOptions = {
+              radius: 0,
+              fillColor: "normal",
+              id: i,
+              strokeOpacity: 0,
+              strokeWeight: 0,
+              fillOpacity: 0,
+              map: map,
+              center: myLatLng
+            }
           };
-        };
         // place circle in an array
         Circles[i] = new google.maps.Circle(circleOptions);
+
     }// end build the circles
 
     // Change Meters to Miles
@@ -436,7 +454,7 @@ ApptexObj.ContexOnPostRender = function(ctx) {
             // draw the markers
             drawMaker(i);
             // draw the circles
-            drawCircle(i);//*/
+            drawCircle(i);
             // Add add Event Listener
             addListnerToMarkers(i)
           } else {
@@ -489,6 +507,7 @@ ApptexObj.ContexOnPostRender = function(ctx) {
       {
         //so we need to get the Lat & Long
         geocodeAddress(geocoder, map);
+                
       } else {
         // this is a normal school
         myLatLng = new google.maps.LatLng(location[ApptexObj.Fields.fldLatitude], location[ApptexObj.Fields.fldLongitude]);
@@ -496,9 +515,12 @@ ApptexObj.ContexOnPostRender = function(ctx) {
         drawMaker(i);
         // draw the circles
         drawCircle(i);
+        //console.log(Markers[i].labelContent + " " + Circles.length);
         // Add Listener
         addListnerToMarkers(i)
       }
+
+      //console.log("ON! " + Markers[i].labelContent + " " + Circles[i].id + "/" + Circles.length + " Color = " + Circles[i].fillColor + " / " + lColors[i]);
 
       // remove normal titles from markers
       if(lColors[i] == "normal"){
