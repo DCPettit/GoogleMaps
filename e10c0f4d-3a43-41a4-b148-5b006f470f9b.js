@@ -160,25 +160,13 @@ ApptexObj.ContexOnPostRender = function(ctx) {
 
         // Set CSS for the control border.
         var controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = '#fff';
-        controlUI.style.border = '2px solid #fff';
-        controlUI.style.borderRadius = '3px';
-        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        controlUI.style.cursor = 'pointer';
-        controlUI.style.marginTop = '10px';
-        controlUI.style.marginBottom = '10px';
-        controlUI.style.textAlign = 'center';
+        controlUI.setAttribute("class", "buttonBorder");
         controlUI.title = 'Click to Zoom Top';
         controlDiv.appendChild(controlUI);
 
         // Set CSS for the control interior.
         var controlText = document.createElement('div');
-        controlText.style.color = 'rgb(25,25,25)';
-        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-        controlText.style.fontSize = '12px';
-        controlText.style.lineHeight = '32px';
-        controlText.style.paddingLeft = '5px';
-        controlText.style.paddingRight = '5px';
+        controlText.setAttribute("class", "buttonInterior");
         controlText.innerHTML = 'Zoom Top';
         controlUI.appendChild(controlText);
 
@@ -224,26 +212,13 @@ ApptexObj.ContexOnPostRender = function(ctx) {
 
         // Set CSS for the control border.
         var controlUI1 = document.createElement('div');
-        controlUI1.style.backgroundColor = '#fff';
-        controlUI1.style.border = '2px solid #fff';
-        controlUI1.style.borderRadius = '3px';
-        controlUI1.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        controlUI1.style.cursor = 'pointer';
-        controlUI1.style.marginTop = '5px';
-        controlUI1.style.marginBottom = '2px';
-        controlUI1.style.marginLeft = '10px';
-        controlUI1.style.textAlign = 'center';
+        controlUI1.setAttribute("class", "buttonBorder");
         controlUI1.title = 'Click to Toggle Schools';
         controlToggleDiv.appendChild(controlUI1);
 
         // Set CSS for the control interior.
         var controlText1 = document.createElement('div');
-        controlText1.style.color = 'rgb(25,25,25)';
-        controlText1.style.fontFamily = 'Roboto,Arial,sans-serif';
-        controlText1.style.fontSize = '12px';
-        controlText1.style.lineHeight = '38px';
-        controlText1.style.paddingLeft = '5px';
-        controlText1.style.paddingRight = '5px';
+        controlText1.setAttribute("class", "buttonInterior");
         controlText1.innerHTML = 'Toggle Schools';
         controlUI1.appendChild(controlText1);
 
@@ -287,26 +262,13 @@ ApptexObj.ContexOnPostRender = function(ctx) {
 
         // Set CSS for the control border.
         var controlUI2 = document.createElement('div');
-        controlUI2.style.backgroundColor = '#fff';
-        controlUI2.style.border = '2px solid #fff';
-        controlUI2.style.borderRadius = '3px';
-        controlUI2.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        controlUI2.style.cursor = 'pointer';
-        controlUI2.style.marginTop = '5px';
-        controlUI2.style.marginBottom = '2px';
-        controlUI2.style.marginLeft = '10px';
-        controlUI2.style.textAlign = 'center';
+        controlUI2.setAttribute("class", "buttonBorder");
         controlUI2.title = 'Click to Toggle Names';
         controlToggleDiv.appendChild(controlUI2);
 
         // Set CSS for the control interior.
         var controlText2 = document.createElement('div');
-        controlText2.style.color = 'rgb(25,25,25)';
-        controlText2.style.fontFamily = 'Roboto,Arial,sans-serif';
-        controlText2.style.fontSize = '12px';
-        controlText2.style.lineHeight = '38px';
-        controlText2.style.paddingLeft = '5px';
-        controlText2.style.paddingRight = '5px';
+        controlText2.setAttribute("class", "buttonInterior");
         controlText2.innerHTML = 'Toggle Names';
         controlUI2.appendChild(controlText2);
 
@@ -342,37 +304,28 @@ ApptexObj.ContexOnPostRender = function(ctx) {
               }// end if (inner) 
             }// end for
           }// end if (outer)
-          var zoomLevel = map.getZoom();
-          map.setZoom(13);
-          map.setZoom(zoomLevel);
+        flashZoom();
         })// end toggle click event listeners
     }// end function 
+
+    function flashZoom() {
+        var zoomLevel = map.getZoom();
+        map.setZoom(13);
+        map.setZoom(zoomLevel);
+    }
 
     // toggle Circles
     function ToggleCirclesControl(controlToggleCirclesDiv, map) {
 
         // Set CSS for the control border.
         var controlUI3 = document.createElement('div');
-        controlUI3.style.backgroundColor = '#fff';
-        controlUI3.style.border = '2px solid #fff';
-        controlUI3.style.borderRadius = '3px';
-        controlUI3.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        controlUI3.style.cursor = 'pointer';
-        controlUI3.style.marginTop = '5px';
-        controlUI3.style.marginBottom = '10px';
-        controlUI3.style.marginLeft = '10px';
-        controlUI3.style.textAlign = 'center';
+        controlUI3.setAttribute("class", "buttonBorder");
         controlUI3.title = 'Click to Toggle Circles';
         controlToggleDiv.appendChild(controlUI3);
 
         // Set CSS for the control interior.
         var controlText3 = document.createElement('div');
-        controlText3.style.color = 'rgb(25,25,25)';
-        controlText3.style.fontFamily = 'Roboto,Arial,sans-serif';
-        controlText3.style.fontSize = '12px';
-        controlText3.style.lineHeight = '38px';
-        controlText3.style.paddingLeft = '5px';
-        controlText3.style.paddingRight = '5px';
+        controlText3.setAttribute("class", "buttonInterior");
         controlText3.innerHTML = 'Toggle Circles';
         controlUI3.appendChild(controlText3);
 
@@ -380,22 +333,22 @@ ApptexObj.ContexOnPostRender = function(ctx) {
         controlUI3.addEventListener('click', function() {
          
           if(clicked == 1) {
-            //console.log("clicked = " + clicked);
+            //console.log("clicked = " + clicked + " i = " + i);
               for (i = 0; i < Circles.length; i++)
               {
                 if(lColors[i] != "normal")
                 {
-                  Circles[i].visible=false;
+                  Circles[i].setOptions({fillOpacity:0.10, strokeOpacity:0.8}); 
                   clicked = 0;
                 }// end if (inner) 
               }// end for   
           } else {
-            //console.log("clicked = " + clicked);
+            //console.log("clicked = " + clicked) + " i = " + i;
               for (i = 0; i < Circles.length; i++)
               {
                 if(lColors[i] != "normal")
                 {
-                  Circles[i].visible=true;
+                  Circles[i].setOptions({fillOpacity:0, strokeOpacity:0}); 
                   clicked = 1;
                 }// end if (inner) 
             }// end for
@@ -521,7 +474,7 @@ ApptexObj.ContexOnPostRender = function(ctx) {
     //set up geo locator
     geocoder = new google.maps.Geocoder();
 
-    //-----------------Incident Pins--------------------------------\\
+    // Loop through all the row in the EMIT Incidents SharePoint LIST 
     // FOR LOOP [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
     for (var i = 0; i < ctx.ListData.Row.length; i++) { var location = ctx.ListData.Row[i]; 
 
@@ -532,17 +485,18 @@ ApptexObj.ContexOnPostRender = function(ctx) {
         content: location[ApptexObj.Fields.fldTitle] + '<br/> ' + location[ApptexObj.Fields.fldDescription] /*+ ' (' + i + ')'*/
       });// end ver infowindow */   
 
-      if(siteAddress != "")
+      if(siteAddress != "")// if the site address has text then it is a CUSTOM location, so has no lat & Long
       {
-        tester = myLatLng;
+        //so we need to get the Lat & Long
         geocodeAddress(geocoder, map);
       } else {
+        // this is a normal school
         myLatLng = new google.maps.LatLng(location[ApptexObj.Fields.fldLatitude], location[ApptexObj.Fields.fldLongitude]);
         // draw the markers
         drawMaker(i);
         // draw the circles
         drawCircle(i);
-        // 
+        // Add Listener
         addListnerToMarkers(i)
       }
 
@@ -550,60 +504,58 @@ ApptexObj.ContexOnPostRender = function(ctx) {
       if(lColors[i] == "normal"){
         Markers[i].labelClass="blankLabel";
       };
-      //Circles[i].visible=false;
 
-      }// end for loop
+    }// END FOR LOOP [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 
-      // drawing listner
-      google.maps.event.addListener(drawingManager, 'circlecomplete', function(circle) {
-        google.maps.event.addListener(circle, 'dblclick', function() {
-          circle.setMap(null);
-          map.zoom(12);
+    // drawing listner
+    google.maps.event.addListener(drawingManager, 'circlecomplete', function(circle) {
+      google.maps.event.addListener(circle, 'dblclick', function() {
+        circle.setMap(null);
+        map.zoom(12);
+      });
+    });// end addListener
+
+    // drawing listner
+    google.maps.event.addListener(drawingManager, 'markercomplete', function(shape) {
+        google.maps.event.addListener(shape, 'dblclick', function() {
+          shape.setMap(null);
         });
-      });// end addListener
+      }
+    );// end addListener*/
 
-      // drawing listner
-      google.maps.event.addListener(drawingManager, 'markercomplete', function(shape) {
-          google.maps.event.addListener(shape, 'dblclick', function() {
-            shape.setMap(null);
-          });
-        }
-      );// end addListener*/
+    // BUTTONS
+    // Create the DIV to hold the control and call the CenterControl() constructor passing in this DIV.  Zoom to Top button
+    var centerControlDiv = document.createElement('div');
+    var centerControl = new CenterControl(centerControlDiv, map);
+    centerControlDiv.index = 2;
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
-      // BUTTONS
-      // Create the DIV to hold the control and call the CenterControl() constructor passing in this DIV.  Zoom to Top button
-      var centerControlDiv = document.createElement('div');
-      var centerControl = new CenterControl(centerControlDiv, map);
-      centerControlDiv.index = 2;
-      map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+    //  Create the DIV to hold the control  ToggleSchoolsControl
+    var controlToggleDiv = document.createElement('div');
+    var ToggleSchoolsControl = new ToggleSchoolsControl(controlToggleDiv, map);
+    controlToggleDiv.index = 3;
+    map.controls[google.maps.ControlPosition.LEFT].push(controlToggleDiv);
 
-      //  Create the DIV to hold the control  ToggleSchoolsControl
-      var controlToggleDiv = document.createElement('div');
-      var ToggleSchoolsControl = new ToggleSchoolsControl(controlToggleDiv, map);
-      controlToggleDiv.index = 3;
-      map.controls[google.maps.ControlPosition.LEFT].push(controlToggleDiv);
+    //  Create the DIV to hold the control  ToggleSchoolsNameControl
+    var controlToggleNamesDiv = document.createElement('div');
+    var ToggleSchoolsNamesControl = new ToggleSchoolsNamesControl(controlToggleNamesDiv, map);
+    controlToggleNamesDiv.index = 4;
+    map.controls[google.maps.ControlPosition.LEFT].push(controlToggleNamesDiv);
+    //
 
-      //  Create the DIV to hold the control  ToggleSchoolsNameControl
-      var controlToggleNamesDiv = document.createElement('div');
-      var ToggleSchoolsNamesControl = new ToggleSchoolsNamesControl(controlToggleNamesDiv, map);
-      controlToggleNamesDiv.index = 4;
-      map.controls[google.maps.ControlPosition.LEFT].push(controlToggleNamesDiv);
-      //
+    ///*//  Create the DIV to hold the control  ToggleCirclesNameControl
+    var controlToggleCirclesDiv = document.createElement('div');
+    var ToggleCirclesControl = new ToggleCirclesControl(controlToggleCirclesDiv, map);
+    controlToggleCirclesDiv.index = 5;
+    map.controls[google.maps.ControlPosition.LEFT].push(controlToggleCirclesDiv);
+    //*/
 
-      /*//  Create the DIV to hold the control  ToggleCirclesNameControl
-      var controlToggleCirclesDiv = document.createElement('div');
-      var ToggleCirclesControl = new ToggleCirclesControl(controlToggleCirclesDiv, map);
-      controlToggleCirclesDiv.index = 5;
-      map.controls[google.maps.ControlPosition.LEFT].push(controlToggleCirclesDiv);
-      //*/
-
-      drawingManager.setMap(map);
-    });// end function 
+    drawingManager.setMap(map);
+  });// end function 
   
 
 };// end ApptextObj
 
-// Google Maps Dev Key
 if(!ApptexLoadedJSFiles['GoogleMaps']){ 
   // Google Maps Dev Key
   document.write("<script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBCdSbI2HBJRu9kgve7ZMAn1nEQ9xNEEZM&libraries=drawing'></script>");
@@ -614,8 +566,8 @@ if(!ApptexLoadedJSFiles['GoogleMaps']){
   ".incidentLabel {" +
   "  width: 150px; " +
   "  height: 20px; " +
-  "  paddingLeft: 20px;" +
-  "  paddingRight: 20px;" +
+  "  padding-Left: 20px;" +
+  "  padding-Right: 20px;" +
 
   "  border: 1px solid #eb3a44; " +
   "  border-radius: 5px; " +
@@ -645,6 +597,28 @@ if(!ApptexLoadedJSFiles['GoogleMaps']){
   "  font-size: 12px; " +
   "  color: transparent /*#25383C*/ /*#eb3a44*/; " +
   "}" +
+
+    ".buttonBorder {" +
+  "  background-Color: #fff; " +
+  "  border: 2px solid #fff; " +
+  "  border-Radius: 3px; " +
+  "  box-Shadow: 0 2px 6px rgba(0,0,0,.3); " +
+  "  cursor: cursor; " +
+  "  margin-Top: 5px; " +
+  "  margin-Bottom: 10px; " +
+  "  margin-Left: 10px; " +
+  "  text-Align: center; " +
+  "}" +
+
+    ".buttonInterior {" +
+  "  Color: rgb(25,25,25); " +
+  "  font-Family: Roboto,Arial,sans-serif; " +
+  "  font-size: 12px; " +
+  "  line-height: 38px; " +
+  "  padding-Left: 5px;" +
+  "  padding-Right: 5px;; " +
+  "}" +
+
   "</style>");
 //transparent
   ApptexLoadedJSFiles['GoogleMaps'] = true; 
